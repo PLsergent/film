@@ -8,20 +8,20 @@
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
- 
+
 const DEBUG = true; // production : false; dev : true
 
 // Accès base de données
-const BD_HOST = 'localhost';
+const BD_HOST = 'mydb';
 const BD_DBNAME = 'p1604581';
-const BD_USER = 'p1604581';
-const BD_PWD = '268449';
+const BD_USER = 'root';
+const BD_PWD = 'mamene';
 
 // Langue du site
 const LANG ='FR-fr';
 
 // Paramètres du site : nom de l'auteur ou des auteurs
-const AUTEUR = 'p1604581'; 
+const AUTEUR = 'ya pas dauteur wesh';
 const TITRE = 'Only for the better';
 
 //dossiers racines du site
