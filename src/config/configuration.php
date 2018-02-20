@@ -12,8 +12,8 @@
 const DEBUG = true; // production : false; dev : true
 
 // Accès base de données
-const BD_HOST = 'mydb';
-const BD_DBNAME = 'p1604581';
+const BD_HOST = 'db';
+const BD_DBNAME = 'mydb';
 const BD_USER = 'root';
 const BD_PWD = 'mamene';
 

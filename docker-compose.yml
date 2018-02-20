@@ -5,7 +5,13 @@ services:
     ports:
     - "8080:80"
     links:
-    - db:mydb
+    - db:db
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+    - "4040:80"
+    links:
+    - db:db
   db:
     image: mysql
     environment:
