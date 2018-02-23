@@ -23,25 +23,3 @@ catch(PDOException $e)
 {
 	die(ERREUR_CONNECT_BDD.' : '.$e->getMessage());
 }
-
-// s'il n'y a pas d'erreurs : recherche dans la base de l'utilisateur
-if(isset($nom))
-{
-	$requete = "SELECT * FROM Utilisateur where login = ?";
-	$donnees = array(
-					$nom
-					);
-	try
-	{
-		$query = $bdd->prepare($requete);
-		$query->execute($donnees);
-		if(!$resultats = $query->fetch(PDO::FETCH_ASSOC))
-		{
-			$erreur = ERREUR_INSCRIPTION;
-		}
-	}
-	catch(PDOException $e)
-	{
-		die(ERREUR_QUERY_BDD.' : '.$e->getMessage());
-	}
-}

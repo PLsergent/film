@@ -21,7 +21,7 @@ const BD_PWD = 'mamene';
 const LANG ='FR-fr';
 
 // Paramètres du site : nom de l'auteur ou des auteurs
-const AUTEUR = 'ya pas dauteur wesh';
+const AUTEUR = 'G6S3';
 const TITRE = 'Only for the better';
 
 //dossiers racines du site

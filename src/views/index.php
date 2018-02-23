@@ -28,78 +28,64 @@
 <HTML>
   <HEAD>
     <meta charset ="utf-8"/>
-    <TITLE><?= TITRE ?></TITLE>
+    <TITLE>FILM DISPONIBLE</TITLE>
     <link rel="stylesheet" type="text/css" href="hello.css" />
   </HEAD>
 <BODY>
-	<select>
-		<option value="Science Fiction">Science Fiction</option>
-		<option value="Science Fiction">Science Fiction</option>
-		<option value="Science Fiction">Science Fiction</option>
-	</select>
-(1, 'Science Fiction'),
-(2, 'Americana'),
-(3, 'Art vidéo'),
-(4, 'Buddy movie'),
-(5, 'Chanbara'),
-(6, 'Chronique'),
-(7, 'Cinéma amateur'),
-(8, 'Cinéma d\'auteur'),
-(9, 'Cinéma de montagne'),
-(10, 'Cinéma expérimental'),
-(11, 'Comédie'),
-(12, 'Documentaire'),
-(13, 'Cinéma surréaliste '),
-(14, 'Drame'),
-(15, 'Film à sketches'),
-(16, 'Film à suspense'),
-(17, 'Film d\'action'),
-(18, 'Film d\'aventure'),
-(19, 'Film catastrophe'),
-(20, 'Film érotique'),
-(21, 'Film d\'espionnage'),
-(22, 'Film d\'exploitation'),
-(23, 'Film fantastique'),
-(24, 'Film de guerre'),
-(25, 'Film de guérilla'),
-(26, 'Film historique'),
-(27, 'Film institutionnel'),
-(28, 'Film d\'horreur'),
-(29, 'Film de super-héros'),
-(30, 'Film musical'),
-(31, 'Film policier'),
-(32, 'Film d\'opéra'),
-(33, 'Film pornographique'),
-(34, 'Teen movie'),
-(35, 'Ken Geki'),
-(36, 'Masala'),
-(37, 'Road movie'),
-(38, 'Film d\'amour'),
-(39, 'Péplum'),
-(41, 'Sérial'),
-(42, 'Thriller'),
-(43, 'Troma'),
-(44, 'Western');
+  <?php
+  try
+  {
+  	$bdd = new PDO('mysql:host='.BD_HOST.'; dbname='.BD_DBNAME.'; charset=utf8', BD_USER, BD_PWD);
+  }
+  catch(PDOException $e)
+  {
+  	die(ERREUR_CONNECT_BDD.' : '.$e->getMessage());
+  }
+?>
+<form method="post" action="index.php">
+
+  <label for="pays">Quels films souhaitez-vous afficher ?</label><br/>
+   <input type="submit" value="Valider"/>
+   <select name="genre" id="genre">
+   <option value ="default" selected="selected"></option>
+
 	<?php
-		
-	if (isset($nom)) 
-	{
-		if(isset($erreur)) // affichage des erreurs de login
-		{
-		  echo '  <p class="erreur">'.$nom.' : '.$erreur.'</p>';
-		}
-		else
-		{
-			echo '<ul>';
-			// sinon affichage de la boucle de messages
-			for($i=0;$i<=$resultats['nbRepet']; $i++)
-			{
-				echo '<li>'.$resultats['mot'].' '.$nom.'</li>';
-			}
-			echo '</ul>';
-		}
-	}
-	?>
+
+$reponse = $bdd->query('SELECT * FROM GENRE');
+
+while ($donnees = $reponse->fetch())
+{
+?>
+           <option value="<?php echo $donnees['libelle']; ?>"> <?php echo $donnees['libelle']; ?></option>
+<?php
+}
+?>
+</select>
+</br>
+<?php
+
+$genre = $_POST['genre'];
+$getid = $bdd->query('SELECT ID FROM FILM where libelle='.$genre.'');
+$displayall = $bdd->query('SELECT titre FROM FILM');
+
+
+  if (isset($_POST['genre']))
+  {
+      if ($_POST['genre']=='default'){
+        while ($aff = $displayall->fetch()){
+            echo $aff['titre'];
+        ?>
+        <br/>
+        <br/>
+        <?php
+        }
+      }
+  }
+
+?>
+
+
+
 </BODY>
 </HTML>
 
@@ -108,4 +94,4 @@
 
 
 <!--  Pied de page -->
-<?php require_once(PATH_VIEWS.'footer.php'); 
+<?php require_once(PATH_VIEWS.'footer.php');
