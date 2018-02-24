@@ -47,7 +47,8 @@
   <label for="pays">Quels films souhaitez-vous afficher ?</label><br/>
    <input type="submit" value="Valider"/>
    <select name="genre" id="genre">
-   <option value ="default" selected="selected"></option>
+   <option value="current"><?php echo $_POST['genre']; ?></option>
+   <option value ="Tous les films">Tous les films</option>
 
 	<?php
 
@@ -62,29 +63,38 @@ while ($donnees = $reponse->fetch())
 ?>
 </select>
 </br>
+</br>
 <?php
 
 $genre = $_POST['genre'];
-$getid = $bdd->query('SELECT ID FROM FILM where libelle='.$genre.'');
 $displayall = $bdd->query('SELECT titre FROM FILM');
+$getid = $bdd->query("SELECT ID FROM GENRE where libelle='$genre'");
+$id = $getid->fetch();
+$id = $id['ID'];
+$display = $bdd->query("SELECT titre FROM FILM
+                        where Genid='$id'");
 
-
-  if (isset($_POST['genre']))
-  {
-      if ($_POST['genre']=='default'){
-        while ($aff = $displayall->fetch()){
-            echo $aff['titre'];
-        ?>
-        <br/>
-        <br/>
-        <?php
-        }
-      }
+if (isset($_POST['genre'])) {
+  if ($genre == 'Tous les films') {
+    while ($aff = $displayall->fetch()) {
+      echo $aff['titre'];
+      ?>
+    </br>
+    <?php
+    }
+  }else{
+    while ($aff = $display->fetch()) {
+      echo $aff['titre'];
+      ?>
+    </br>
+    <?php
+    }
   }
+}
+
 
 ?>
-
-
+</br>
 
 </BODY>
 </HTML>
