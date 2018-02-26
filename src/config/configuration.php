@@ -13,8 +13,8 @@ const DEBUG = true; // production : false; dev : true
 
 // Accès base de données
 const BD_HOST = 'db';
-const BD_DBNAME = 'mydb';
-const BD_USER = 'root';
+const BD_DBNAME = 'film_db';
+const BD_USER = 'pl_bru';
 const BD_PWD = 'mamene';
 
 // Langue du site
