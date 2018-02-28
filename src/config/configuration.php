@@ -21,7 +21,7 @@ const BD_PWD = 'mamene';
 const LANG ='FR-fr';
 
 // Paramètres du site : nom de l'auteur ou des auteurs
-const AUTEUR = 'G6S3';
+const AUTEUR = 'Sergent et Inec';
 const TITRE = 'Only for the better';
 
 //dossiers racines du site
@@ -32,12 +32,13 @@ define('PATH_MODELS','./models/');
 define('PATH_VIEWS','./views/');
 define('PATH_SCRIPTS','./scripts/');
 define('PATH_TEXTES','./languages/');
+define('PATH_ENTITIES','./entities/');
 
 //sous dossiers
 define('PATH_CSS', PATH_ASSETS.'css/');
 define('PATH_IMAGES', PATH_ASSETS.'images/');
 //define("PATH_GALERIE",'galerie/');
-//define('PATH_LOG','log/');
+define('PATH_LOG','log/');
 
 //fichiers
 //define('LOG_BDD','logbdd.txt');
