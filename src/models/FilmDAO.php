@@ -4,7 +4,8 @@ require_once(PATH_MODELS.'DAO.php');
 class filmDAO extends DAO {
     public function fromId($id) {
         require_once(PATH_ENTITIES.'film.php');
-        $res = $this->queryRow('SELECT * FROM FILM WHERE id = ?', array($id));
+        $sql = 'SELECT id, titre, resume, nomFichier, genId FROM FILM WHERE id = ?';
+        $res = $this->queryRow($sql, array($id));
 
         if($res) {
             return new film($res['id'], $res['titre'], $res['resume'],
@@ -13,4 +14,4 @@ class filmDAO extends DAO {
         else return null;
     }
 }
-
+?>

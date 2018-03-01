@@ -28,4 +28,4 @@
 
 
 <!--  Pied de page -->
-<?php require_once(PATH_VIEWS.'footer.php'); 
+<?php require_once(PATH_VIEWS.'footer.php');

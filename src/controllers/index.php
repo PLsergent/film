@@ -16,7 +16,7 @@ require_once(PATH_MODELS.'FilmDAO.php');
 $genres = array();
 $films = array();
 
-$gDAO = new GenreDAO();
+$gDAO = new genreDAO();
 $i = 1;
 $genre = $gDAO->fromId($i);
 while($genre != null) {
@@ -25,9 +25,9 @@ while($genre != null) {
     $genre = $gDAO->fromId($i);
 }
 
-$fDAO = new FilmDAO();
+$fDAO = new filmDAO();
 if(isset($_POST['genre']) and $_POST['genre'] != 'Tous les films') {
-    $genre_choisi = $_POST['genre'];
+    $genre_choisi = htmlspecialchars($_POST['genre']);
     $i = 0;
     do {
         $i = $i + 1;

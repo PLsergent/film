@@ -20,7 +20,7 @@
 
 <!--  Début de la page -->
 <form method="post" action="index.php">
-<label for="pays">Quels films souhaitez-vous afficher ?</label></br>
+<label for="film">Quels films souhaitez-vous afficher ?</label></br>
  <input type="submit" value="Valider"/>
  <select name="genre" id="genre">
  <option value="Choisissez un genre"><?php echo $genre_choisi; ?></option>
@@ -43,12 +43,14 @@
 
 <?php
 foreach($films as $film) {
-  echo $film->getTitre();
 ?>
+  <a href='index.php?page=details&id=<?= $film->getId() ?>'/>
+  <?php echo $film->getTitre(); ?>
   </br>
   <img src="<?= PATH_IMAGES.$film->getNomFichier() ?>" height="240px"
-                                                              width="180px"/>
-  </br>
+                                                       width="180px"/>
+  </a>
+  </br></br>
 <?php
 }
 ?>
