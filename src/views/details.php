@@ -20,17 +20,17 @@
 
 
 <!--  Début de la page -->
-<h1><?php  echo Détails film;?></h1>
+<h1>Détails film</h1>
 
 <!--  Liste  -->
 <h2><?php echo $film->getTitre();?><h2></br>
-<img src="<?= PATH_IMAGES.$film->getNomFichier() ?>" height="400" width="auto"/></br></br>
+<img src="<?= PATH_IMAGES.$film->getNomFichier() ?>" height="400"
+                                                     width="auto"/></br></br>
 <h2>Résumé</h2></br>
-<?php echo $film->getResume();?></br></br>
+<?php echo $film->getResume(); ?></br></br>
 <h2>Genre</h2></br>
-<?php echo $genre_libelle->getLibelle();?></br>
+<?php echo $genre_libelle->getLibelle(); ?></br>
 <!--  Fin de la page -->
-
 
 <!--  Pied de page -->
 <?php require_once(PATH_VIEWS.'footer.php');

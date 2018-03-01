@@ -6,14 +6,14 @@ services:
     - '80:80'
     links:
     - db:db
-#  phpmyadmin:
-#    image: phpmyadmin/phpmyadmin
-#    ports:
-#    - '4040:80'
-#    links:
-#    - db:db
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+    - '4040:80'
+    links:
+    - db:db
   db:
-    image: mysql:8
+    image: dnhsoft/mysql-utf8
     command: >
         --character-set-server=utf8mb4
         --collation-server=utf8mb4_unicode_ci
