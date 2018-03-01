@@ -20,7 +20,7 @@
 
 
 <!--  Début de la page -->
-<h1><?php  echo TITRE_PAGE_ACCUEIL;?></h1>
+<h1><?php  echo Détails film;?></h1>
 
 <!--  Liste  -->
 <h2><?php echo $film->getTitre();?><h2></br>
