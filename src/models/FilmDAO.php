@@ -8,7 +8,7 @@ class filmDAO extends DAO {
 
         if($res) {
             return new film($res['id'], $res['titre'], $res['resume'],
-                            $res['nomFichier'],$res['genId']);
+                            $res['nomFichier'], $res['genId']);
         }
         else return null;
     }

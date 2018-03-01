@@ -43,9 +43,11 @@
 
 <?php
 foreach($films as $film) {
+  echo $film->getTitre();
 ?>
-  <?php echo $film->getTitre(); ?></br>
-  <img src="<?php echo PATH_IMAGES.$film->getNomFichier() ?>" height="240px" width="180px"/>
+  </br>
+  <img src="<?= PATH_IMAGES.$film->getNomFichier() ?>" height="240px"
+                                                              width="180px"/>
   </br>
 <?php
 }

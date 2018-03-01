@@ -28,10 +28,10 @@ while($genre != null) {
 $fDAO = new FilmDAO();
 if(isset($_POST['genre']) and $_POST['genre'] != 'Tous les films') {
     $genre_choisi = $_POST['genre'];
-    $i = 1;
+    $i = 0;
     do {
-        $genre = $gDAO->fromId($i);
         $i = $i + 1;
+        $genre = $gDAO->fromId($i);
     } while(($genre != null) and ($genre->getLibelle() != $genre_choisi));
 
     $j = 1;
