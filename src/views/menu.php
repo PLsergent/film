@@ -22,8 +22,12 @@
 						<?= MENU_ACCUEIL ?>
 					</a>
 				</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li <?php echo ($page=='login' ? 'class="active"':'')?>>
+					<a href="login.php">
+						<?= MENU_LOGIN ?>
+          </a>
     </ul>
   </div>
 </nav>
-
-

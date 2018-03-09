@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-    - '80:80'
+    - '8080:80'
     links:
     - db:db
   phpmyadmin:
@@ -14,8 +14,6 @@ services:
     - db:db
   db:
     image: dnhsoft/mysql-utf8
-    ports:
-    - '3306:3306'
     environment:
       MYSQL_DATABASE: film_db
       MYSQL_USER: pl_bru

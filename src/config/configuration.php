@@ -24,6 +24,11 @@ const LANG ='FR-fr';
 const AUTEUR = 'Sergent et Inec';
 const TITRE = 'Only for the better';
 
+//login
+
+const USER = 'pl';
+const PSWD = 'mamene';
+
 //dossiers racines du site
 define('PATH_CONTROLLERS','./controllers/');
 define('PATH_ASSETS','./assets/');
