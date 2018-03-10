@@ -18,6 +18,8 @@ class genreDAO extends DAO {
 
         $genres = array();
         if($res) {
+            // TODO: for some reason, $g['id'] does not return anything
+            // which is why the ids are hardcoded...
             $i = 1;
             foreach($res as $g) {
                 $genres[] = new genre($i, $g['libelle']);

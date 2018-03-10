@@ -2,18 +2,6 @@
 require_once(PATH_MODELS.'DAO.php');
 
 class filmDAO extends DAO {
-    public function fromId($id) {
-        require_once(PATH_ENTITIES.'film.php');
-        $sql = 'SELECT id, titre, resume, nomFichier, genId FROM FILM WHERE id = ?';
-        $res = $this->queryRow($sql, array($id));
-
-        if($res) {
-            return new film($res['id'], $res['titre'], $res['resume'],
-                            $res['nomFichier'], $res['genId']);
-        }
-        else return null;
-    }
-
     public function all() {
         require_once(PATH_ENTITIES.'film.php');
         $sql = 'SELECT id, titre, resume, nomFichier, genId FROM FILM';
@@ -26,6 +14,31 @@ class filmDAO extends DAO {
                                     $f['nomFichier'], $f['genId']);
             }
             return $films;
+        }
+        else return null;
+    }
+
+    public function fromId($id) {
+        require_once(PATH_ENTITIES.'film.php');
+        $sql = 'SELECT id, titre, resume, nomFichier, genId FROM FILM WHERE id = ?';
+        $res = $this->queryRow($sql, array($id));
+
+        if($res) {
+            return new film($res['id'], $res['titre'], $res['resume'],
+                            $res['nomFichier'], $res['genId']);
+        }
+        else return null;
+    }
+
+    public function fromGenre($genre_id) {
+        require_once(PATH_ENTITIES.'film.php');
+
+        $sql = 'SELECT id, titre, resume, nomFichier, genId FROM FILM, GENRE WHERE FILM.Genid=GENRE.ID AND GENRE.ID = ?';
+        $res = $this->queryAll($sql, array($genre_id));
+
+        if($res) {
+            return new film($res['id'], $res['titre'], $res['resume'],
+                            $res['nomFichier'], $res['genId']);
         }
         else return null;
     }
