@@ -29,5 +29,13 @@
 						<?= MENU_LOGIN ?>
           </a>
     </ul>
+    <?php if ($_SESSION['logged']==true) { ?>
+    <ul class="nav navbar-nav">
+      <li <?php echo ($page=='add' ? 'class="active"':'')?>>
+        <a href='index.php?page=add'>
+          <?= MENU_ADD ?>
+        </a>
+    </ul>
+  <?php } ?>
   </div>
 </nav>
