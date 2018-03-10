@@ -13,45 +13,33 @@
 require_once(PATH_MODELS.'GenreDAO.php');
 require_once(PATH_MODELS.'FilmDAO.php');
 
-$genres = array();
-$films = array();
-
 $gDAO = new genreDAO();
-$i = 1;
-$genre = $gDAO->fromId($i);
-while($genre != null) {
-    $genres[] = $genre;
-    $i = $i + 1;
-    $genre = $gDAO->fromId($i);
-}
+$genres = $gDAO->all();
 
 $fDAO = new filmDAO();
-if(isset($_POST['genre']) and $_POST['genre'] != 'Tous les films') {
-    $genre_choisi = htmlspecialchars($_POST['genre']);
-    $i = 0;
-    do {
-        $i = $i + 1;
-        $genre = $gDAO->fromId($i);
-    } while(($genre != null) and ($genre->getLibelle() != $genre_choisi));
+if (isset($_POST['genre'])) {
+  $genre_choisi = $_POST['genre'];
+  if($genre_choisi != "Tous les films") {
+    $films = array();
+    $genre_choisi_libelle = ($gDAO->fromId((int)$genre_choisi))->getLibelle();
 
-    $j = 1;
-    $film = $fDAO->fromId($j);
-    while($film != null) {
-        if($film->getGenId() == $i) {
-            $films[] = $film;
-        }
-        $j = $j + 1;
-        $film = $fDAO->fromId($j);
-    }
-} else {
     $i = 1;
     $film = $fDAO->fromId($i);
     while($film != null) {
+      if ($film->getGenId() == $genre_choisi) {
         $films[] = $film;
-        $i = $i + 1;
-        $film = $fDAO->fromId($i);
+      }
+      $i = $i + 1;
+      $film = $fDAO->fromId($i);
     }
+  } else {
+    $genre_choisi_libelle = $genre_choisi;
+    $films = $fDAO->all();
+  }
+} else {
+  $films = $fDAO->all();
 }
+
 
 require_once(PATH_VIEWS.'index.php');
 ?>

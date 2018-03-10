@@ -23,15 +23,14 @@
 <label for="film">Quels films souhaitez-vous afficher ?</label></br>
  <input type="submit" value="Valider"/>
  <select name="genre" id="genre">
- <option value="Choisissez un genre"><?php echo $genre_choisi; ?></option>
+ <option value="Choisissez un genre"><?= $genre_choisi_libelle ?></option>
    <option value ="Tous les films">Tous les films</option>
 
     <?php
     foreach($genres as $genre) {
-      $libelle = $genre->getLibelle();
     ?>
-      <option value="<?php echo $libelle; ?>">
-        <?php echo $libelle; ?>
+      <option value="<?= $genre->getId() ?>">
+        <?= $genre->getLibelle() ?>
       </option>
     <?php
     }
@@ -42,16 +41,24 @@
 </br>
 
 <?php
-foreach($films as $film) {
+if ($films) {
+  foreach($films as $film) {
 ?>
-  <a href='index.php?page=details&id=<?= $film->getId() ?>'/>
-  <?php echo $film->getTitre(); ?>
-  </br>
-  <img src="<?= PATH_IMAGES.$film->getNomFichier() ?>" height="240px"
+    <a href='index.php?page=details&id=<?= $film->getId() ?>'/>
+    <?= $film->getTitre() ?>
+    </br>
+    <img src="<?= PATH_IMAGES.$film->getNomFichier() ?>" height="240px"
                                                        width="180px"/>
-  </a>
-  </br></br>
+    </a>
+    </br></br>
 <?php
+  }
+} else {
+  if ($genre_choisi_libelle) {
+    echo "Pas de films du genre: ".$genre_choisi_libelle;
+  } else {
+    echo "Pas de films dans la base de données.";
+  }
 }
 ?>
 </br>
