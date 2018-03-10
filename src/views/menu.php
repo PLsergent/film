@@ -25,7 +25,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li <?php echo ($page=='login' ? 'class="active"':'')?>>
-					<a href="login.php">
+					<a href='index.php?page=login'>
 						<?= MENU_LOGIN ?>
           </a>
     </ul>
