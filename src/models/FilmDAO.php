@@ -1,9 +1,10 @@
 <?php
 require_once(PATH_MODELS.'DAO.php');
+require_once(PATH_ENTITIES.'film.php');
 
 class filmDAO extends DAO {
+
     public function all() {
-        require_once(PATH_ENTITIES.'film.php');
         $sql = 'SELECT id, titre, resume, nomFichier, genId FROM FILM';
         $res = $this->queryAll($sql);
 
@@ -19,7 +20,6 @@ class filmDAO extends DAO {
     }
 
     public function fromId($id) {
-        require_once(PATH_ENTITIES.'film.php');
         $sql = 'SELECT id, titre, resume, nomFichier, genId FROM FILM WHERE id = ?';
         $res = $this->queryRow($sql, array($id));
 
@@ -31,8 +31,6 @@ class filmDAO extends DAO {
     }
 
     public function fromGenre($genre_id) {
-        require_once(PATH_ENTITIES.'film.php');
-
         $sql = 'SELECT id, titre, resume, nomFichier, genId FROM FILM, GENRE WHERE FILM.Genid=GENRE.ID AND GENRE.ID = ?';
         $res = $this->queryAll($sql, array($genre_id));
 
@@ -41,6 +39,27 @@ class filmDAO extends DAO {
                             $res['nomFichier'], $res['genId']);
         }
         else return null;
+    }
+
+    public function insert($film) {
+        $sql = 'INSERT INTO FILM ?';
+        $this->queryBdd($sql, array($film->getId(), $film->getTitre(),
+                                    $film->getResume(), $film->getNomFichier(),
+                                    $film->getGenId()));
+    }
+
+    public function update($film) {
+        $sql = 'UPDATE INTO FILM ?';
+        $this->queryBdd($sql, array($film->getId(), $film->getTitre(),
+                                    $film->getResume(), $film->getNomFichier(),
+                                    $film->getGenId()));
+    }
+
+    public function delete($film) {
+        $sql = 'DROP FILM ?';
+        $this->queryBdd($sql, array($film->getId(), $film->getTitre(),
+                                    $film->getResume(), $film->getNomFichier(),
+                                    $film->getGenId()));
     }
 }
 ?>
