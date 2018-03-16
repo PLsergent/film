@@ -21,6 +21,8 @@
 <!--  Début de la page -->
 <h3>Connexion</h3>
 <?php
+
+if (isset($_SESSION['logged'])){
   if ($_SESSION['logged'] == false){ ?>
       <form method="post" action="">
         <p>
@@ -37,6 +39,7 @@
       </form>
 <?php }else{
   echo 'Connecté';
+  }
 }?>
 
 <!--  Pied de page -->

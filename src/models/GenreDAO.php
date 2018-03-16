@@ -1,32 +1,45 @@
 <?php
-require_once(PATH_MODELS.'DAO.php');
-require_once(PATH_ENTITIES.'genre.php');
+require_once (PATH_MODELS . 'DAO.php');
+require_once (PATH_ENTITIES . 'Genre.php');
 
-class genreDAO extends DAO {
-    public function fromId($id) {
-        $res = $this->queryRow('SELECT * FROM GENRE WHERE id = ?', array($id));
-        if ($res) {
-            return new genre($res['id'], $res['libelle']);
+class GenreDAO extends DAO
+{
+
+    public function getAll()
+    {
+        $res = $this->queryAll('SELECT * FROM GENRE');
+        if ($res == false)
+            $genres = array();
+        else {
+            foreach ($res as $p) {
+                $genres[] = new Genre($p['id'], $p['libelle']);
+            }
         }
-        else return null;
+        return $genres;
     }
 
-    public function all() {
-        $sql = 'SELECT * FROM GENRE';
-        $res = $this->queryAll($sql);
-
-        $genres = array();
-        if($res) {
-            // TODO: for some reason, $g['id'] does not return anything
-            // which is why the ids are hardcoded...
-            $i = 1;
-            foreach($res as $g) {
-                $genres[] = new genre($i, $g['libelle']);
-                $i = $i + 1;
+    public function getAllUsed()
+    {
+        $res = $this->queryAll('SELECT DISTINCT GENRE.* FROM GENRE JOIN FILM ON GENRE.ID = FILM.GENID');
+        if ($res == false)
+            $genres = array();
+        else {
+            foreach ($res as $p) {
+                $genres[] = new Genre($p['id'], $p['libelle']);
             }
-            return $genres;
         }
-        else return null;
+        return $genres;
+    }
+
+    public function getById($id)
+    {
+        $res = $this->queryRow('SELECT * FROM GENRE WHERE id=?', array(
+            $id
+        ));
+        if ($res == false)
+            $genre = null;
+        else
+            $genre = new Genre($res['id'], $res['libelle']);
+        return $genre;
     }
 }
-?>

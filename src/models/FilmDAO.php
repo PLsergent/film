@@ -1,65 +1,53 @@
 <?php
-require_once(PATH_MODELS.'DAO.php');
-require_once(PATH_ENTITIES.'film.php');
+require_once (PATH_MODELS . 'DAO.php');
+require_once (PATH_ENTITIES . 'Film.php');
 
-class filmDAO extends DAO {
+class FilmDAO extends DAO
+{
 
-    public function all() {
-        $sql = 'SELECT id, titre, resume, nomFichier, genId FROM FILM';
-        $res = $this->queryAll($sql);
-
-        $films = array();
-        if($res) {
-            foreach($res as $f) {
-                $films[] = new film($f['id'], $f['titre'], $f['resume'],
-                                    $f['nomFichier'], $f['genId']);
+    public function getAll($genId = 0)
+    {
+        if ($genId == 0)
+            $res = $this->queryAll('SELECT * FROM FILM');
+        else
+            $res = $this->queryAll('SELECT * FROM FILM WHERE genId=?', array(
+                $genId
+            ));
+        if ($res == false)
+            $films = array();
+        else {
+            foreach ($res as $p) {
+                $films[] = new Film($p['id'], $p['titre'], $p['resume'], $p['genId'] , $p['nomFichier'] );
             }
-            return $films;
         }
-        else return null;
+        return $films;
     }
 
-    public function fromId($id) {
-        $sql = 'SELECT id, titre, resume, nomFichier, genId FROM FILM WHERE id = ?';
-        $res = $this->queryRow($sql, array($id));
-
-        if($res) {
-            return new film($res['id'], $res['titre'], $res['resume'],
-                            $res['nomFichier'], $res['genId']);
-        }
-        else return null;
+    public function getById($id)
+    {
+        $res = $this->queryRow('SELECT * FROM FILM WHERE id=?', array(
+            $id
+        ));
+        if ($res === false)
+            $film = null;
+        else
+            $film = new Film($res['id'], $res['titre'], $res['resume'], $res['genId'] , $res['nomFichier']);
+        return $film;
     }
 
-    public function fromGenre($genre_id) {
-        $sql = 'SELECT id, titre, resume, nomFichier, genId FROM FILM, GENRE WHERE FILM.Genid=GENRE.ID AND GENRE.ID = ?';
-        $res = $this->queryAll($sql, array($genre_id));
-
-        if($res) {
-            return new film($res['id'], $res['titre'], $res['resume'],
-                            $res['nomFichier'], $res['genId']);
-        }
-        else return null;
+    public function insert($titre, $resume, $genId, $nomFichier)
+    {
+       $this->queryBdd('INSERT INTO FILM (titre, resume, genId, nomFichier) VALUE (?, ?, ?, ?)',
+                       array($titre, $resume, $genId, $nomFichier));
     }
 
-    public function insert($film) {
-        $sql = 'INSERT INTO FILM ?';
-        $this->queryBdd($sql, array($film->getId(), $film->getTitre(),
-                                    $film->getResume(), $film->getNomFichier(),
-                                    $film->getGenId()));
+    public function update($column, $value)
+    {
+        $this->queryBdd("UPDATE FILM SET ?='?'", array($column, $value));
     }
 
-    public function update($film) {
-        $sql = 'UPDATE INTO FILM ?';
-        $this->queryBdd($sql, array($film->getId(), $film->getTitre(),
-                                    $film->getResume(), $film->getNomFichier(),
-                                    $film->getGenId()));
-    }
-
-    public function delete($film) {
-        $sql = 'DROP FILM ?';
-        $this->queryBdd($sql, array($film->getId(), $film->getTitre(),
-                                    $film->getResume(), $film->getNomFichier(),
-                                    $film->getGenId()));
+    public function delete($id)
+    {
+        $this->queryBdd("DELETE FROM FILM WHERE id=?", array($id));
     }
 }
-?>

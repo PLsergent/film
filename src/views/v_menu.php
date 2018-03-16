@@ -23,15 +23,26 @@
 					</a>
 				</li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li <?php echo ($page=='login' ? 'class="active"':'')?>>
-					<a href='index.php?page=login'>
-						<?= MENU_LOGIN ?>
-          </a>
-    </ul>
+      <?php if ($_SESSION['logged']==false){?>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+  					<a href='index.php?page=login'>
+  						<?= MENU_LOGIN ?>
+            </a>
+      </ul>
+      <?php }?>
+      <?php if ($_SESSION['logged']==true){?>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+  					<a href='index.php?page=login'>
+  						<?= MENU_LOGOUT ?>
+            </a>
+      </ul>
+      <?php }?>
+
     <?php if ($_SESSION['logged']==true) { ?>
     <ul class="nav navbar-nav">
-      <li <?php echo ($page=='add' ? 'class="active"':'')?>>
+      <li>
         <a href='index.php?page=add'>
           <?= MENU_ADD ?>
         </a>

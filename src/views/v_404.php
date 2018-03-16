@@ -12,8 +12,9 @@
  */
 ?>
 <?php require_once(PATH_VIEWS.'header.php');?>
-<?php 
-  $message = 'page_non_trouvee';
-  require_once(PATH_VIEWS.'alert.php');
+<?php
+require_once (PATH_VIEWS . 'alert.php');
 ?>
-<?php require_once(PATH_VIEWS.'footer.php'); 
+<?php
+
+require_once (PATH_VIEWS . 'footer.php'); 

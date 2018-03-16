@@ -10,5 +10,7 @@
  * http://www.opensource.org/licenses/MIT
  */
 
+$alert = choixAlert('url_non_valide');
+
 //appel de la vue
-require_once(PATH_VIEWS.'404.php'); 
+require_once(PATH_VIEWS.$page.'.php'); 
