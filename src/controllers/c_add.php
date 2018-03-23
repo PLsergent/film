@@ -28,7 +28,7 @@ if (!empty($_POST)){
     
     $FilmDAO = new FilmDAO(DEBUG);
     $FilmDAO->insert($titre, $resume, $genId, $_FILES['image']['name']);
-    $alert = array('messageAlert'=>'Le film a bien été ajouté.', 'classAlert'=>'success');
+    header('Location: index.php');
   } else {
     $alert = array('messageAlert'=>$erreur, 'classAlert'=>'danger');
   }
