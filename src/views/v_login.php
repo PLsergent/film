@@ -37,9 +37,7 @@ if (isset($_SESSION['logged'])){
             <input type="submit" value="Valider"/>
         </p>
       </form>
-<?php }else{
-  echo 'Connecté';
-  }
+<?php }
 }?>
 
 <!--  Pied de page -->

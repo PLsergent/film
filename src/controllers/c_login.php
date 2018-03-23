@@ -15,8 +15,24 @@ if (isset($_SESSION['logged'])){
 
       $_SESSION['logged'] = true;
 
+    }else{
+      if (($_POST['pseudo']!="") || ($_POST['pass']!="")){
+        $erreur = "Mot de passe ou pseudo incorrect.";
+        $_SESSION['logged'] = false;
+      }else{
+        $_SESSION['logged'] = false;
+      }
     }
   }
 }
+
+if(!isset($erreur) && $_SESSION['logged'] == true) {
+  $alert = array('messageAlert'=>'Connecté', 'classAlert'=>'success');
+}else{
+  if (($_POST['pseudo']!="") || ($_POST['pass']!="")){
+    $alert = array('messageAlert'=>$erreur, 'classAlert'=>'danger');
+  }
+}
+
 require_once (PATH_VIEWS . $page . '.php');
 ?>
